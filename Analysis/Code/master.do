@@ -1,28 +1,39 @@
 /***************************************
-* Program to produce Tables IV-VI in Angrist and Kreuger (1991)
+* Program to execute Task 2
 ****************************************/
 
-global rootdir "C:/Users/chadi/Dropbox/Applied-Economics/AK91"
+global rootdir "C:/Users/chadi/Dropbox/Applied-Economics/AK91/AK91"
 cd $rootdir
 
-*Load raw data to Build/Input folder. First remove and create Build/Input directory, then load data.
+*Task 2a: Clean Data Procedure
+*Angrist and Krueger (1991) and Angrist and Lavy (1999)
+
+*1.Import the raw data into a raw data folder.
+*Deny writing to this folder.
+
+*2. Normalize the data set AL99
+*rename variables and save in Build/Input folder
+!rmdir "Build/Temp" /s /q
+mkdir "Build/Temp"
+copy Raw/NEW7080.dta Build/Temp/
+
 !rmdir "Build/Input" /s /q
 mkdir "Build/Input"
-copy Raw/NEW7080.dta Build/Input/
+do Build/Code/AK91.do
+!rmdir "Build/Temp" /s /q
 
-*Build basic data sets in Analysis/Input
+* Task 2b: Clean AK91 code.
+* Review names.
+* Remove duplication of code and data.
+cd $rootdir
 !rmdir "Analysis/Input" /s /q
 mkdir "Analysis/Input"
-do Build/Code/TableIV_data.do
-do Build/Code/TableV_data.do
-do Build/Code/TableVI_data.do
+do Build/Code/Table_data.do
 
-* Analysis to replicate tables
+* Print output regression tables.
+cd $rootdir
 !rmdir "Analysis/Output" /s /q
-mkdir "Analysis/Output"
+mkdir "Analysis/Output" 
 do Analysis/Code/TableIV.do
 do Analysis/Code/TableV.do
 do Analysis/Code/TableVI.do
-
-!rmdir "Build/Input" /s /q
-!rmdir "Analysis/Input" /s /q
