@@ -37,3 +37,9 @@ mkdir "Analysis/Output"
 do Analysis/Code/TableIV.do
 do Analysis/Code/TableV.do
 do Analysis/Code/TableVI.do
+
+* Write a program that runs regressions and prints output tables
+* Call this program to create columns 1 3 5 7 in the tables
+adopath ++ "$rootdir/Analysis/Code"
+cap program drop columns1357
+columns1357
